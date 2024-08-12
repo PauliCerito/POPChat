@@ -1,0 +1,8 @@
+Servicios\ConsultaService.class
+Persistencia\exceptions\IllegalOrphanException.class
+Servlets\SVPagPrincipal.class
+Persistencia\ConsultaJpaController.class
+Persistencia\exceptions\NonexistentEntityException.class
+Modelo\Consulta.class
+Modelo\Consulta_.class
+Persistencia\exceptions\PreexistingEntityException.class
