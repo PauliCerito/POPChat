@@ -1,0 +1,139 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 14 ago 2024, 18:40:32
+    Author     : Usuario
+*/
+
+html{
+    overflow-y: hidden;
+}
+/*No se toca*/
+.pop-categoria{
+    background-color:rgba(0, 0, 0, 0.5);
+    display:none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+/*Adaptar a pantallas más grandes*/
+.popup-contenido{
+    background-color: whitesmoke;
+    height: 10vh;
+    width: 60vw;
+    top: 200px;
+    left:15%;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    position: relative;
+    border-radius: 5px;
+}
+
+h3{
+    position:relative;
+    border: 1px solid black;
+    background-color: beige;
+    left: 0px;
+    text-align:center;
+    font-size:larger;
+}
+.boton-cocina{
+    background-color: antiquewhite;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-family:Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    font-size:medium;
+    position: relative;
+    left: 5%;
+}
+
+.boton-plomeria{
+    background-color: bisque;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-family:Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    font-size:medium;
+    position: relative;
+    left: 5%;
+}
+
+.boton-electr{
+    background-color: bisque;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-family:Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    font-size:medium;
+    position: relative;
+    left: 5%;
+}
+
+.chat{
+    display: flex;
+    flex-direction: column;
+    height: 800px;
+    border: 1px solid black;
+    position: relative;
+}
+.pregunta{
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+.formulario-contenido{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    position: sticky;
+    bottom: 0;
+    background-color: antiquewhite;
+
+}
+.input{
+    padding: 5px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.boton-enviar{
+    position: relative;
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#newChat{
+    position: relative;
+    padding: 5px 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.formulario{
+    display: flex;
+    flex: 1;
+    gap: 10px;
+}
