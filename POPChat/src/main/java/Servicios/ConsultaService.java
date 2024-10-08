@@ -21,7 +21,7 @@ public class ConsultaService {
     private ConsultaJpaController jpaControl = new ConsultaJpaController();
     
     //Método para enviarle la pregunta del usuario a Ollama
-     public void mandarPregunta(String prompt) {
+     public void mandarPregunta(String prompt, String categoria) {
         Consulta consulta = new Consulta();
         consulta.setPregunta(prompt);
 
@@ -32,7 +32,7 @@ public class ConsultaService {
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
 
-            String jsonInputString = "{ \"model\": \"orca-mini:3b\", \"prompt\": \"" + prompt + "\", \"stream\": false }";
+            String jsonInputString = "{ \"model\": \"orca-mini:3b\", \"prompt\": \"Ahora eres un" + categoria + "." + prompt + "\", \"stream\": false }";
 
             // Enviar datos
             try (OutputStream os = conn.getOutputStream()) {
@@ -63,6 +63,3 @@ public class ConsultaService {
     public List<Consulta> traerRespuesta(){
         return jpaControl.findConsultaEntities();
     }
-    
-    
-}
