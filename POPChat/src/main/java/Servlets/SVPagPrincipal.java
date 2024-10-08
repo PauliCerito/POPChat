@@ -30,21 +30,28 @@ public class SVPagPrincipal extends HttpServlet {
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        ConsultaService consultaServ = new ConsultaService();
-        
-        String prompt = request.getParameter("pregunta");
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    ConsultaService consultaServ = new ConsultaService();
+    
+    String prompt = request.getParameter("pregunta");
+    
+    String categoria = request.getParameter("categoria");
 
+    if (prompt != null && !prompt.trim().isEmpty()) {
         request.setAttribute("pregun", prompt);
-        
-        consultaServ.mandarPregunta(prompt);
-        
-        List<Consulta> consu = consultaServ.traerRespuesta();
+
+        consultaServ.mandarPregunta(prompt, categoria);  
+
+        List<Consulta> consu = consultaServ.traerRespuesta(); 
         request.setAttribute("respuesta", consu);
-        
-        request.getRequestDispatcher("paginaPrincipalPOPChat.jsp").forward(request, response);
+    } else {
+        request.setAttribute("pregun", null);
+        request.setAttribute("respuesta", null);
     }
+    
+    request.getRequestDispatcher("paginaPrincipalPOPChat.jsp").forward(request, response);
+}
 
     @Override
     public String getServletInfo() {
