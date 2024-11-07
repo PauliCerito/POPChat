@@ -1,139 +1,377 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 14 ago 2024, 18:40:32
-    Author     : Usuario
-*/
-
-html{
-    overflow-y: hidden;
-}
-/*No se toca*/
-.pop-categoria{
-    background-color:rgba(0, 0, 0, 0.5);
-    display:none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-/*Adaptar a pantallas más grandes*/
-.popup-contenido{
-    background-color: whitesmoke;
-    height: 10vh;
-    width: 60vw;
-    top: 200px;
-    left:15%;
-    padding-bottom: 20px;
-    padding-top: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border: 2px solid black;
-    justify-content: center;
-    align-items: center;
-    height: 10%;
-    position: relative;
-    border-radius: 5px;
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h3{
-    position:relative;
-    border: 1px solid black;
-    background-color: beige;
-    left: 0px;
-    text-align:center;
-    font-size:larger;
-}
-.boton-cocina{
-    background-color: antiquewhite;
-    padding: 5px 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-family:Arial, Helvetica, sans-serif;
-    cursor: pointer;
-    font-size:medium;
-    position: relative;
-    left: 5%;
+/* Temas */
+body.light-theme {
+  background-color: #f5f5f5; /* Color de fondo general claro */
+  color: #333;
 }
 
-.boton-plomeria{
-    background-color: bisque;
-    padding: 5px 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-family:Arial, Helvetica, sans-serif;
-    cursor: pointer;
-    font-size:medium;
-    position: relative;
-    left: 5%;
+body.dark-theme {
+  background-color: #1e1e1e; /* Color de fondo general oscuro */
+  color: #e0e0e0;
 }
 
-.boton-electr{
-    background-color: bisque;
-    padding: 5px 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-family:Arial, Helvetica, sans-serif;
-    cursor: pointer;
-    font-size:medium;
-    position: relative;
-    left: 5%;
+/* Barra de navegación */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #005f73; /* Color formal para la barra */
+  color: white;
+  position: relative;
 }
 
-.chat{
-    display: flex;
-    flex-direction: column;
-    height: 800px;
-    border: 1px solid black;
-    position: relative;
-}
-.pregunta{
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
-}
-.formulario-contenido{
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-    position: sticky;
-    bottom: 0;
-    background-color: antiquewhite;
-
-}
-.input{
-    padding: 5px 5px;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    flex: 1;
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.boton-enviar{
-    position: relative;
-    padding: 5px 15px;
-    border: 1px solid black;
-    border-radius: 30px;
-    cursor: pointer;
+.logo-img {
+  max-width: 150px;
+  height: auto;
 }
 
-#newChat{
-    position: relative;
-    padding: 5px 20px;
-    border: 1px solid black;
-    border-radius: 30px;
-    cursor: pointer;
+.nav-controls {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
 }
 
-.formulario{
-    display: flex;
-    flex: 1;
-    gap: 10px;
+.nav-controls button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+
+.nav-controls button:hover {
+  background-color: #009688; /* Color claro al pasar el mouse */
+}
+
+.theme-switch {
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  position: relative;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: background-color 0.4s, transform 0.4s;
+  border-radius: 34px;
+}
+
+.theme-switch input:checked + .slider {
+  background-color: #005f73; /* Color activado */
+}
+
+.theme-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.theme-switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Contenedor de chat */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  margin-top: 20px;
+}
+
+/* Contenedor existente para el área de chat */
+.chat-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #e0fbfc; /* Color de fondo claro para el área de chat */
+  height: 350px; /* Establecer una altura fija más pequeña para el área del chat */
+}
+
+/* Mensajes y entrada de texto */
+.messages-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0.5rem; /* Reduce el padding */
+  background-color: #ffffff; /* Color claro para el área de mensajes */
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: #005f73 #e0fbfc; /* Color del scrollbar (dedo) y el fondo */
+}
+
+/* Para navegadores WebKit (Chrome, Safari) */
+.messages-container::-webkit-scrollbar {
+  width: 8px; /* Ancho del scrollbar */
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: #e0fbfc; /* Color de fondo del track */
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: #005f73; /* Color del scrollbar (dedo) */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilos para el tema oscuro */
+body.dark-theme .navbar {
+  background-color: #0d7377; /* Color oscuro para la barra */
+}
+
+body.dark-theme .chat-area {
+  background-color: #2b2b2b; /* Color de fondo oscuro para el área de chat */
+}
+
+body.dark-theme .messages-container {
+  background-color: #1a1a1a; /* Color oscuro para el área de mensajes */
+  scrollbar-color: #009688 #2b2b2b; /* Color del scrollbar (dedo) y el fondo */
+}
+
+/* Para navegadores WebKit (Chrome, Safari) */
+body.dark-theme .messages-container::-webkit-scrollbar-track {
+  background: #2b2b2b; /* Color de fondo del track en tema oscuro */
+}
+
+body.dark-theme .messages-container::-webkit-scrollbar-thumb {
+  background-color: #009688; /* Color del scrollbar (dedo) en tema oscuro */
+}
+
+.message-container {
+  display: flex;
+  align-items: flex-start;
+  margin: 5px; /* Reduce el margen */
+}
+
+.message-bubble {
+  background-color: #c3fae3; /* Burbuja de mensaje clara */
+  padding: 8px 12px; /* Reduce el padding */
+  border-radius: 30px; /* Cambia la forma para que sea más pequeña */
+  max-width: 50%; /* Reduce el ancho máximo */
+  word-wrap: break-word;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sender-message-container {
+  justify-content: flex-end;
+}
+
+.sender-message-bubble {
+  background-color: #007a8c; /* Burbuja de mensaje del remitente en claro */
+  color: white;
+}
+
+.message-input-container {
+  display: flex;
+  align-items: center;
+  padding: 5px; /* Reduce el padding */
+  background-color: #f1f1f1; /* Color claro para la entrada de mensaje */
+}
+
+#messageInput {
+  flex-grow: 1;
+  margin-right: 4px; /* Reduce el margen */
+  border: none;
+  outline: none;
+  border-radius: 25px; /* Ajusta el borde para que sea más pequeño */
+  height: 28px; /* Ajusta la altura */
+  font-size: 14px; /* Reduce el tamaño de la fuente */
+  padding: 5px 10px; /* Reduce el padding */
+}
+
+/* Cambios de color de texto según el tema */
+body.light-theme .message-input-container {
+  color: #333; /* Color de texto claro */
+}
+
+body.light-theme #messageInput {
+  color: #333; /* Color de texto claro para el input */
+}
+
+body.dark-theme .message-input-container {
+  color: #e0e0e0; /* Color de texto oscuro */
+}
+
+body.dark-theme #messageInput {
+  color: #e0e0e0; /* Color de texto oscuro para el input */
+}
+
+#sendButton, #newChatButton {
+  background-color: #007a8c; /* Color claro para el botón de enviar */
+  border-radius: 25px; /* Ajusta el borde para que sea más pequeño */
+  outline: none;
+  border: none;
+  padding: 8px 12px; /* Reduce el padding */
+  color: #fff;
+  font-size: 14px; /* Reduce el tamaño de la fuente */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#sendButton:hover, #newChatButton:hover {
+  background-color: #005f73; /* Color en hover para los botones claros */
+}
+
+#newChatButton {
+  margin-left: 6px; /* Reduce el margen entre botones */
+}
+
+/* Modales */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  border-radius: 8px;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilo para el tema oscuro */
+body.dark-theme .message-bubble {
+  background-color: #3d3d3d; /* Burbuja de mensaje oscura */
+}
+
+body.dark-theme .sender-message-bubble {
+  background-color: #009688; /* Burbuja de mensaje del remitente en oscuro */
+}
+
+body.dark-theme .message-input-container {
+  background-color: #424242; /* Color oscuro para la entrada de mensaje */
+}
+
+body.dark-theme #messageInput {
+  background-color: #2c2c2c; /* Color oscuro para el input de mensaje */
+}
+
+body.dark-theme #sendButton, body.dark-theme #newChatButton {
+  background-color: #009688; /* Color oscuro para el botón de enviar */
+}
+
+body.dark-theme #sendButton:hover, body.dark-theme #newChatButton:hover {
+  background-color: #007a8c; /* Color en hover para los botones oscuros */
+}
+
+
+/* Estilos para el nuevo modal */
+#categoryModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Estilo para el botón de cierre en el modal */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative; /* Para posicionar la 'x' dentro del modal */
+}
+
+.close-button {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px; /* Ajusta la posición vertical */
+  right: 10px; /* Ajusta la posición horizontal */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+}
+
+
+#categoryModal h2 {
+  margin-bottom: 20px; /* Espacio entre el título y los botones */
+}
+
+#categoryModal button {
+  margin: 5px; /* Margen entre botones */
+  padding: 10px 15px; /* Espaciado dentro de los botones */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#categoryModal button:hover {
+  background-color: #009688; /* Color en hover para los botones del modal */
+  color: white; /* Color de texto en hover */
+}
+
+/* Estilo para el tema oscuro */
+body.dark-theme #categoryModal .modal-content {
+  background-color: #424242; /* Color de fondo para el modal en oscuro */
+  color: white; /* Color de texto en oscuro */
+}
+
+
+
