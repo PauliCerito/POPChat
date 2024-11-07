@@ -6,23 +6,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Consulta{
+public class Consulta {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_Consulta;
     private String respuesta;
     private String pregunta;
+    private String categoria;
 
-    public Consulta(int id_Consulta, String respuesta, String pregunta) {
-        this.id_Consulta = id_Consulta;
+    // Constructor con parámetros
+    public Consulta(String respuesta, String pregunta, String categoria) {
         this.respuesta = respuesta;
         this.pregunta = pregunta;
+        this.categoria = categoria;
     }
     
-    public Consulta(){
+    // Constructor vacío
+    public Consulta() {
     }
 
+    // Getter y Setter para categoria
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
+    // Getter y Setter para id_Consulta
     public int getId_Consulta() {
         return id_Consulta;
     }
@@ -31,6 +44,7 @@ public class Consulta{
         this.id_Consulta = id_Consulta;
     }
 
+    // Getter y Setter para respuesta
     public String getRespuesta() {
         return respuesta;
     }
@@ -39,6 +53,7 @@ public class Consulta{
         this.respuesta = respuesta;
     }
 
+    // Getter y Setter para pregunta
     public String getPregunta() {
         return pregunta;
     }
@@ -46,5 +61,6 @@ public class Consulta{
     public void setPregunta(String pregunta) {
         this.pregunta = pregunta;
     }
+
     
 }
